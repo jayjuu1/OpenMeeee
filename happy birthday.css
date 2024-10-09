@@ -1,0 +1,58 @@
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  p {
+    margin: 0 0;
+    position: absolute;
+    font: 16px 'Bree Serif', serif;
+    color: #eeeeee;
+    height: 25px;
+    top: calc(100vh - 30px);
+    text-shadow: 0 0 2px white;
+  }
+  p a {
+    text-decoration: none;
+    color: #aaa;
+  }
+  span {
+    font-size: 11px;
+  }
+  p > a:first-of-type {
+    font-size: 20px;
+  }
+  body {
+    overflow: hidden;
+  }
+  #customButton {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    animation: pulse 2s infinite;
+  }
+  
+  #customButton:hover {
+    background: linear-gradient(45deg, #f5576c, #f093fb);
+  }  
+      
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+   }
+    100% {
+      transform: scale(1);
+    }
+  }
+       
