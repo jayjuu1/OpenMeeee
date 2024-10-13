@@ -1,11 +1,46 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const openButton = document.getElementById('openButton');
+  const audio1 = new Audio('Start.mp3'); 
+  const audio2 = new Audio('CatSing.mp3');
+  const canvas = document.getElementById('c');
+
+  // Hide the canvas initially
+  canvas.style.display = 'none';
+
+ // Prevent the animation from running immediately
+ let animationStarted = false;
+
+  openButton.addEventListener('click', () => {
+    // Start the background music
+    audio1.play();
+    audio1.addEventListener('ended', () => {
+      // Play the second audio in loop
+      audio2.loop = true;
+      audio2.play();
+    });
+  
+    // Show the canvas and start the animation
+    canvas.style.display = 'block';
+    openButton.style.display = 'none';  // Hide the "Open me" button
+
+    // Show the "Click me" button after the next page logic
+    customButton.style.display = 'block';
+
+    // Start the animation (only once after clicking "Open me")
+    if (!animationStarted) {
+      anim();  // Trigger the fireworks animation
+      animationStarted = true;  // Ensure it only runs once
+    }
+  });
+})
+
 let w = (c.width = window.innerWidth),
   h = (c.height = window.innerHeight),
   ctx = c.getContext("2d"),
   hw = w / 2;
 (hh = h / 2),
   (opts = {
-    // change the text in here //
-    strings: ["HAPPY", "BIRTHDAY", "Reirei!"],
+    strings: ["HAPPY", "BIRTHDAY", "Reirei!"], // text na lilipad
     charSize: 30,
     charSpacing: 30,
     lineHeight: 40,
@@ -388,7 +423,20 @@ for (let i = 0; i < opts.strings.length; ++i) {
   }
 }
 
-anim();
+// Call to start the animation
+function anim() {
+  window.requestAnimationFrame(anim);
+  ctx.fillStyle = "#222222";
+  ctx.fillRect(0, 0, w, h);
+  ctx.translate(hw, hh);
+  var done = true;
+  for (var l = 0; l < letters.length; ++l) {
+    letters[l].step();
+    if (letters[l].phase !== "done") done = false;
+  }
+  ctx.translate(-hw, -hh);
+  if (done) for (var l = 0; l < letters.length; ++l) letters[l].reset();
+}
 
 window.addEventListener("resize", function () {
   w = c.width = window.innerWidth;
